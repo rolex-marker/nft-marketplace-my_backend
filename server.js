@@ -20,7 +20,15 @@ mongoose.connect(process.env.MONGO_URI)
 const app = express();
 const port = process.env.PORT || 4000;
 
-app.use(cors());
+/* ✅ CORS — FIRST */
+app.use(cors({
+  origin: 'https://nft-marketplace-my-frontend.vercel.app', // Your Vercel URL
+  credentials: true, // Required for cookies/sessions/authorization headers
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'pgy-no-browser-warning']
+}));
+
+
 app.use(express.json());
 
 // Auth routes
